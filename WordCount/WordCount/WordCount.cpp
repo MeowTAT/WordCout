@@ -24,22 +24,27 @@ int main(int argc, char* argv[])
 			while (!feof(fp))
 			{
 				c = fgetc(fp);
-				num++;
+				if (c!=EOF)
+					num++;
+				
 			}
-			printf("字符数：%d\n", num-1);
+			printf("字符数：%d\n", num);
 		}
-
+		//统计单词数
 		if (!strcmp(argv[1], "-w"))
 		{
 			while (!feof(fp))
 			{
 				c = fgetc(fp);
-				if (c == ' ' || c == ',')
+				if(c != EOF)
 				{
-					num++;
+					if (c == ' ' || c == ',')
+						num++;
 				}
+				if (c == EOF && num != 0)
+					num++;
 			}
-			printf("单词数：%d\n", num+1);
+			printf("单词数：%d\n", num);
 		}
 		fclose(fp);
 	}
